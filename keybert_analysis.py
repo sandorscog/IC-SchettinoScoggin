@@ -4,7 +4,6 @@ class KeyBert(object):
 
     def __init__(self):
         self.kw_model = KeyBERT('neuralmind/bert-base-portuguese-cased')
-        return
 
 
     def keybertAnalysis(self, doc, min_words=1, max_words=2, num_terms=5):
