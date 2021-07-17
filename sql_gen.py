@@ -10,10 +10,10 @@ ENGINE = InnoDB;
 
 class SQL:
 
-    def __init__(self, schema, tables):
-        self.schema = schema
-        self.tables = tables
-        self.file = open(schema + '.sql', 'w')
+    def __init__(self, schema, tables): # the constructor must receive the name of the schema and a list
+        self.schema = schema            # the list has the specifications of each table from the model
+        self.tables = tables            # it is a list o tuples, each tuple has a string and a list of tuples
+        self.file = open(schema + '.sql', 'w') # those are composed of 2 strings
         self.file.close()
 
 
@@ -29,12 +29,12 @@ class SQL:
 
     def create_table(self, table): # returns an entity's SQL table
         sql = 'CREATE TABLE IF NOT EXISTS `' + self.schema + '`.`' + table[0] + '`(\n'
-        sql += '`id'+ table[0] + '` INT NOT NULL AUTO_INCREMENT,\n'
+        sql += '\t`id'+ table[0] + '` INT NOT NULL AUTO_INCREMENT,\n'
 
         for i in table[1]:
-            sql += '`' + i[0] + '` ' + i[1] + ' NULL,\n'
+            sql += '\t`' + i[0] + '` ' + i[1] + ' NULL,\n'
 
-        sql += 'PRIMARY KEY (`id'+ table[0] +'`)) \nENGINE = InnoDB;\n\n\n\n'
+        sql += '\tPRIMARY KEY (`id'+ table[0] +'`)) \nENGINE = InnoDB;\n\n\n\n'
         return sql
 
 
@@ -58,8 +58,8 @@ class SQL:
         script += self.create_ending()
         return script
 
-
-
+# testing
+"""
 lista_atributos = [('name', 'VARCHAR(45)'), ('founding', 'DATE')]
 tabela = ('band', lista_atributos)
 
@@ -72,3 +72,4 @@ tabela3 = ('album', lista_atributos3)
 tabelas = [tabela, tabela2, tabela3]
 sql = SQL('bands', tabelas)
 sql.write_in_file(sql.generate_script())
+"""
