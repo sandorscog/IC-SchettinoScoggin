@@ -10,10 +10,9 @@ ENGINE = InnoDB;
 
 class SQL:
 
-    def __init__(self, schema, table_name, attributes=None):
+    def __init__(self, schema, tables, attributes=None):
         self.schema = schema
-        self.table_name = table_name
-        self.columns = attributes
+        self.tables = tables
         self.file = open(schema + '.sql', 'w')
         self.file.close()
 
@@ -28,14 +27,19 @@ class SQL:
         return sql
 
 
-    def create_table(self):
-        sql = 'CREATE TABLE IF NOT EXISTS `' + self.schema + '`.`' + self.table_name + '`('
-        sql += '`id'+ self.table_name + '` INT NOT NULL AUTO_INCREMENT, `name` VARCHAR(45) NOT NULL, PRIMARY KEY (`id'+ self.table_name +'`)) ENGINE = InnoDB;'
+    def create_table(self, table): # returns an entity's SQL table
+        sql = 'CREATE TABLE IF NOT EXISTS `' + self.schema + '`.`' + table[0] + '`('
+        sql += '`id'+ table[0] + '` INT NOT NULL AUTO_INCREMENT,\n'
+
+        for i in table[1]:
+            sql += '`' + i[0] + '`' + i[1] + 'NULL,\n'
+
+        sql += 'PRIMARY KEY (`id'+ table[0] +'`)) ENGINE = InnoDB;'
         return sql
 
 
-    def create_ending(self):
-        return "SET SQL_MODE=@OLD_SQL_MODE;SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;"
+    def create_ending(self): # will return the last information needed in the script
+        return "SET SQL_MODE=@OLD_SQL_MODE;\nSET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;\nSET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;"
 
 
     def write_in_file(self, text):
@@ -44,11 +48,13 @@ class SQL:
         self.file.close()
 
 
-    def generate_script(self):
-        script = ''
-        script += self.create_header()
+    def generate_script(self):    # generates all the sections of the MySQL Script
+        script = self.create_header()
         script += self.create_schema()
-        script += self.create_table()
+
+        for i in tables: # iterates over the list of tables and adds the new table to the script
+            script += self.create_table(i)
+
         script += self.create_ending()
         return script
 
