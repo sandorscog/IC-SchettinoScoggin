@@ -9,3 +9,13 @@ class KeyBert(object):
     def keybertAnalysis(self, doc, min_words=1, max_words=2, num_terms=5):
         return self.kw_model.extract_keywords(doc, keyphrase_ngram_range=(min_words, max_words), stop_words=None,
                                   use_mmr=True, diversity=0.9, top_n = num_terms)
+
+
+
+
+"""
+def sort_BERTKeys_by_relevance(keywords_list):
+    list = keywords_list
+    list.sort(key=lambda a: a[1], reverse=True)
+    return list
+"""
