@@ -1,8 +1,8 @@
 from keybert_analysis import *
 from string_manipulation import *
 from vocab import *
+from historiaUsuario import *
 
-historia_usuario = 'como usuario eu desejo fazer o cadastro de livros na loja'
 stop_words = ['a','o','as','os','de','da','do','dos','das', 'no', 'nas', 'na', 'nos']
 
 def main():
@@ -10,18 +10,9 @@ def main():
 
     print('*' * 50)
 
-    historia_limpa = remove_stop_words(historia_usuario, stop_words)
-    keyterms_list = i.keybertAnalysis(historia_limpa, 3, 3, 5)
-    keyterms_list.sort(key=lambda a: a[1], reverse=True)
-    print(keyterms_list)
+    user_story = read_user_story()
 
-    aux = contains_create(historia_limpa)
-    print(aux[0])
-
-    keyterms_string_list = [i[0] for i in keyterms_list]
-
-    if aux[0] != '':
-        main_object(contains_term(keyterms_string_list, aux[0]), aux[0])
+    user_story_analysis(i, user_story)
 
 
 if __name__ == '__main__':
