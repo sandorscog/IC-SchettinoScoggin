@@ -1,5 +1,4 @@
 
-
 def insert(table, values):
     return 'INSERT INTO `' + table + '` VALUES(default, ' + ', '.join(['\'' + i + '\'' if type(i) is str else str(i) for i in values]) + ');'
 
