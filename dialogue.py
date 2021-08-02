@@ -2,8 +2,17 @@ import MySQLdb
 import json
 from crud_sql import *
 
-def object_confirmation():
-    return
+def object_confirmation(object):
+    confirmation = False
+    response = ''
+
+    print(object)
+    response = input('Confirma objeto?')
+
+    if(response[0] == 's' or response[0] == 'S'):
+        confirmation = True
+
+    return confirmation
 
 
 def similar_objects(name, sql_cursor):
