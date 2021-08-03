@@ -28,8 +28,8 @@ def main():
 
     tables = define_tables(user_story_analysis(i, user_story, stop_words)[0], sql_con, sql_cursor)
 
-    # data_base = SQL(schema, tables)
-
+    data_base = SQL('zzzzz', tables)
+    data_base.write_in_file(data_base.generate_script())
 
 if __name__ == '__main__':
     main()

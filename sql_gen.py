@@ -28,13 +28,13 @@ class SQL:
 
 
     def create_table(self, table): # returns an entity's SQL table
-        sql = 'CREATE TABLE IF NOT EXISTS `' + self.schema + '`.`' + table[0] + '`(\n'
-        sql += '\t`id'+ table[0] + '` INT NOT NULL AUTO_INCREMENT,\n'
+        sql = 'CREATE TABLE IF NOT EXISTS `' + self.schema + '`.`' + table.name + '`(\n'
+        sql += '\t`id'+ table.name + '` INT NOT NULL AUTO_INCREMENT,\n'
 
-        for i in table[1]:
+        for i in table.attributes:
             sql += '\t`' + i[0] + '` ' + i[1] + ' NULL,\n'
 
-        sql += '\tPRIMARY KEY (`id'+ table[0] +'`)) \nENGINE = InnoDB;\n\n\n\n'
+        sql += '\tPRIMARY KEY (`id'+ table.name +'`)) \nENGINE = InnoDB;\n\n\n\n'
         return sql
 
 
@@ -59,7 +59,11 @@ class SQL:
         return script
 
 class Table:
-    # it is a list o tuples, each tuple has a string and a list of tuples those are composed of 2 strings
+    # it is a tuple, it has a string and a list of tuples those are composed of 2 strings
+    def __init__(self, name, attributes):
+        self.name = name
+        self.attributes = attributes
+        self.tuple = (name, attributes)
 
 # testing
 """
