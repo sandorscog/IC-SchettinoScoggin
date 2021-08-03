@@ -1,0 +1,14 @@
+{
+    "nome": "VARCHAR(100)",
+    "cpf": "VARCHAR(11)", 
+    "idade": "INT", 
+    "genero": "CHAR(8)",
+    "endereco": "VARCHAR(100)", 
+    "preco": "FLOAT(4)", 
+    "autor" : "VARCHAR(100)", 
+    "descricao": "TEXT",
+    "detalhamento" : "TEXT",
+    "numero" : "INT",
+    "quantidade" : "INT",
+    "data" : "DATETIME"
+}
