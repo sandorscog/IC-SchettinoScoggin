@@ -3,7 +3,7 @@ from string_manipulation import *
 from vocab import *
 
 def read_user_story():
-    return 'como usuario eu desejo fazer o cadastro de coisas na loja'
+    return 'como usuario eu desejo fazer o cadastro de livros na loja'
 
 
 def user_story_analysis(key_bert, user_story, stop_words):

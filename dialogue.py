@@ -2,17 +2,18 @@ import MySQLdb
 import json
 from crud_sql import *
 
-def object_confirmation(object):
-    confirmation = False
-    response = ''
+def object_confirmation(object): # object is a tuple (name, [attributes])
 
-    print(object)
-    response = input('Confirma objeto?')
+    print('Nome:\n' + object[0] + '\nAtributos: ')
+    print(object[1])
 
-    if(response[0] == 's' or response[0] == 'S'):
-        confirmation = True
+    response = input('Confirma esse objeto?(sim/nao): ')
+    response.lower()
 
-    return confirmation
+    if(response == 'sim'):
+        return True
+    else:
+        return False
 
 
 def similar_objects(name, sql_cursor):
@@ -35,10 +36,17 @@ def define_tables(object, sql_con, sql_cursor):
     # try to find similar objs
     similar = similar_objects(object, sql_cursor)
 
+
     if similar != None:
         # verificar semelhança
         # if para ler atributos
-        print(similar)
+        for i in similar:
+            objects = json.loads(i[2])
+            attributes = []
+            for key, type in objects.items():
+                attributes.append(key)
+            if object_confirmation((object, attributes)):
+                break
         pass
     else:
         pass
