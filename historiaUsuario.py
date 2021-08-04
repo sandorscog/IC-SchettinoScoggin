@@ -1,9 +1,14 @@
 from keybert_analysis import *
 from string_manipulation import *
 from vocab import *
+from audio import *
 
 def read_user_story():
     return 'como usuario eu desejo fazer o cadastro de livros na loja'
+
+    hist = listen_microphone(message='Diga a história de usuário')
+    print(hist)
+    return hist
 
 
 def user_story_analysis(key_bert, user_story, stop_words):

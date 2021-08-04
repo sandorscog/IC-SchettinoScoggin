@@ -66,6 +66,8 @@ def define_tables(object, sql_con, sql_cursor):
     if similar != None:
         # verificar semelhança
         # if para ler atributos
+        confirmed = False
+
         for i in similar:
             sql_attributes = json.loads(i[2])
             attributes_names = []
